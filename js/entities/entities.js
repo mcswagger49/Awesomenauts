@@ -15,9 +15,9 @@ game.PlayerEntity = me.Entity.extend({
 		this.body.setVelocity(5, 0);
 },
 
-	update: function(){
+	update: function(delta){
 		if (me.input.isKeyPressed("right")) {
-			//sets the position of my x by adding the velocity defined above in 
+			//sets the position of my x by the velocity defined above in 
 			//setVelocity() and multiplying it by me.timer.tick.
 			//me.timer.tick makes the movement look smooth
 			this.body.vel.x += this.body.accel.x * me.timer.tick;
