@@ -12,7 +12,7 @@ game.PlayerEntity = me.Entity.extend({
 			}
 		}]);
 
-		this.body.setVelocity(5, 0);
+		this.body.setVelocity(5, 20);//changed to make player walk on solid floor
 },
 
 	update: function(delta){
