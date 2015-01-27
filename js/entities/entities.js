@@ -13,6 +13,9 @@ game.PlayerEntity = me.Entity.extend({
 		}]);
 
 		this.body.setVelocity(5, 20);//changed to make player walk on solid floor
+		this.renderable.addAnimation("idle", [78]);//makes the player orc to face the screen 
+		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
+		this.renderable.setCurrentAnimation("idle");//helps cause the player to face the screen
 },
 
 	update: function(delta){
@@ -21,11 +24,22 @@ game.PlayerEntity = me.Entity.extend({
 			//setVelocity() and multiplying it by me.timer.tick.
 			//me.timer.tick makes the movement look smooth
 			this.body.vel.x += this.body.accel.x * me.timer.tick;
+			this.flipX(true);
 		}else{
 			this.body.vel.x = 0;
 		}
+		if (this.body.vel.x !== 0) {
+			if(!this.renderable.isCurrentAnimation("walk")){
+				this.renderable.setCurrentAnimation("walk");		
+		}
+	}else{
+		this.renderable.setCurrentAnimation("idle");//makes the character stay still 
+		}
+
 
 		this.body.update(delta);
+
+		this._super(me.Entity, "update", [delta]);//updating our animation
 		return true;
 	}
 });
