@@ -13,6 +13,7 @@ game.PlayerEntity = me.Entity.extend({
 		}]);
 
 		this.body.setVelocity(5, 20);//changed to make player walk on solid floor
+		//Keeps track of which direction your chacrter is going 
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
 		this.renderable.addAnimation("idle", [78]);//makes the player orc to face the screen 
@@ -39,8 +40,8 @@ game.PlayerEntity = me.Entity.extend({
 			this.body.vel.x = 0;
 		}
 		if (me.input.isKeyPressed("jump") && !this.jumping &&  !this.falling) {
-		this.jumping = true;
-		this.body.vel.y -= this.body.accel.y * me.timer.tick;	
+			this.jumping = true;
+			this.body.vel.y -= this.body.accel.y * me.timer.tick;	
 
 		}
 
@@ -79,10 +80,30 @@ game.PlayerEntity = me.Entity.extend({
 			}
 		}
 
+		me.collision.check(this, true, this.collideHandler.bind(this), true);
 		this.body.update(delta);
 
 		this._super(me.Entity, "update", [delta]);//updating our animation
 		return true;
+	},
+
+	collideHandler: function(response) {
+		if(response.b.type==='EnemyBaseEntity') {
+			var ydif = this.pos.y - response.b.pos.y;
+			var xdif =this.pos.x - response.b.pos.x;
+
+			if(ydif<-40 && xdif< 70 && xdif>-35){
+				this.body.falling = false;
+				this.body.vel.y = -1;
+			}
+			else if(xdif>-35 && this.facing==='right' && xdif<0){
+				this.body.vel.x = 0;
+				this.pos.x = this.pos.x -1;
+			}else if(xdif<70 && this.facing==='left' && xdif>0){
+				this.body.vel.x = 0;
+				this.pos.x = this.pos.x -1;
+			}
+		}
 	}
 });
 
