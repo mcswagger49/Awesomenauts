@@ -59,25 +59,12 @@ game.PlayerEntity = me.Entity.extend({
 				this.renderable.setAnimationFrame();	
 			}
 		}
-	else if (this.body.vel.x !== 0) {
+	else if (this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")) {
 			if(!this.renderable.isCurrentAnimation("walk")){
 				this.renderable.setCurrentAnimation("walk");		
 		}
-	}else{
+	}else if(!this.renderable.isCurrentAnimation("attack")) {
 		this.renderable.setCurrentAnimation("idle");//makes the character stay still 
-		}
-
-		if (me.input.isKeyPressed("attack")) {
-			if (!this.renderable.isCurrentAnimation("attack")) {
-				console.log()
-				//sets the current animation to attack and once that is over
-				//gone back to the idle animation
-				this.renderable.setCurrentAnimation("attack", "idle");
-				//Makes it so that the next time we start this sequence
-				//form the first animation, not whereverwe left off
-				//switched to another animation		
-				this.renderable.setAnimationFrame();	
-			}
 		}
 
 		me.collision.check(this, true, this.collideHandler.bind(this), true);
