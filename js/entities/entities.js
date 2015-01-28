@@ -17,7 +17,8 @@ game.PlayerEntity = me.Entity.extend({
 
 		this.renderable.addAnimation("idle", [78]);//makes the player orc to face the screen 
 		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
-		
+		this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
+
 		this.renderable.setCurrentAnimation("idle");//helps cause the player to face the screen
 },
 
@@ -31,7 +32,19 @@ game.PlayerEntity = me.Entity.extend({
 		}else{
 			this.body.vel.x = 0;
 		}
-		if (this.body.vel.x !== 0) {
+	if (me.input.isKeyPressed("attack")) {
+			if (!this.renderable.isCurrentAnimation("attack")) {
+				console.log()
+				//sets the current animation to attack and once that is over
+				//gone back to the idle animation
+				this.renderable.setCurrentAnimation("attack", "idle");
+				//Makes it so that the next time we start this sequence
+				//form the first animation, not whereverwe left off
+				//switched to another animation		
+				this.renderable.setAnimationFrame();	
+			}
+		}
+	else if (this.body.vel.x !== 0) {
 			if(!this.renderable.isCurrentAnimation("walk")){
 				this.renderable.setCurrentAnimation("walk");		
 		}
@@ -39,6 +52,18 @@ game.PlayerEntity = me.Entity.extend({
 		this.renderable.setCurrentAnimation("idle");//makes the character stay still 
 		}
 
+		if (me.input.isKeyPressed("attack")) {
+			if (!this.renderable.isCurrentAnimation("attack")) {
+				console.log()
+				//sets the current animation to attack and once that is over
+				//gone back to the idle animation
+				this.renderable.setCurrentAnimation("attack", "idle");
+				//Makes it so that the next time we start this sequence
+				//form the first animation, not whereverwe left off
+				//switched to another animation		
+				this.renderable.setAnimationFrame();	
+			}
+		}
 
 		this.body.update(delta);
 
