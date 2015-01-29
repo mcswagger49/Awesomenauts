@@ -14,6 +14,10 @@ game.PlayerEntity = me.Entity.extend({
 
 		this.body.setVelocity(5, 20);//changed to make player walk on solid floor
 		//Keeps track of which direction your chacrter is going 
+		this.facing = "right";
+		this.now = new Date().getTime();
+		this.lastHit = this.now;
+		this.lastAttack = new Date().getTime();
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
 		this.renderable.addAnimation("idle", [78]);//makes the player orc to face the screen 
@@ -23,7 +27,8 @@ game.PlayerEntity = me.Entity.extend({
 		this.renderable.setCurrentAnimation("idle");//helps cause the player to face the screen
 },
 
-	update: function(delta){
+	update: function(delta) {
+		this.now = new Date().getTime();
 		if (me.input.isKeyPressed("right")) {
 			//sets the position of my x by the velocity defined above in 
 			//setVelocity() and multiplying it by me.timer.tick.
@@ -32,9 +37,9 @@ game.PlayerEntity = me.Entity.extend({
 			this.flipX(true);
 			this.facing = "right";
 		}else if(me.input.isKeyPressed("left")){
-				this.facing = "left";
-				this.body.vel.x -= this.body.accel.x * me.timer.tick;
-				this.flipX(false);
+			this.facing = "left";
+			this.body.vel.x -=this.body.accel.x * me.timer.tick;
+			this.flipX(false);
 		
 		}else{
 			this.body.vel.x = 0;
@@ -75,9 +80,9 @@ game.PlayerEntity = me.Entity.extend({
 	},
 
 	collideHandler: function(response) {
-		if(response.b.type==='EnemyBaseEntity') {
+		if(response.b.type==='EnemyBaseEntity'){
 			var ydif = this.pos.y - response.b.pos.y;
-			var xdif =this.pos.x - response.b.pos.x;
+			var xdif = this.pos.x - response.b.pos.x;
 
 			if(ydif<-40 && xdif< 70 && xdif>-35){
 				this.body.falling = false;
@@ -88,7 +93,13 @@ game.PlayerEntity = me.Entity.extend({
 				this.pos.x = this.pos.x -1;
 			}else if(xdif<70 && this.facing==='left' && xdif>0){
 				this.body.vel.x = 0;
-				this.pos.x = this.pos.x -1;
+				this.pos.x = this.pos.x +1;
+			}
+
+			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 1000) {
+				console.log("tower Hit");
+				this.lastHit = this.now;
+				response.b.loseHealth();
 			}
 		}
 	}
@@ -171,5 +182,9 @@ update:function(delta) {
 
 onCollision: function(){
 	
+},
+
+loseHealth: function(){
+	this.health--;
 }
 });
