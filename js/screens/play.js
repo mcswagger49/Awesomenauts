@@ -8,16 +8,16 @@ game.PlayScreen = me.ScreenObject.extend({
 
 		me.levelDirector.loadLevel("level01");//show and loads the level to play on the webtsite
 
-		var player = me.pool.pull("player", 0, 420, {});
+		var player = me.pool.pull("player", 0, 420, {});//actualy shows the player on the website
 		me.game.world.addChild(player, 5);
 
 		var gamemanager = me.pool.pull("GameManager", 0, 0,{});
 		me.game.world.addChild(gamemanager, 0);
 
-		me.input.bindKey(me.input.KEY.RIGHT, "right");
-		me.input.bindKey(me.input.KEY.LEFT, "left");
-		me.input.bindKey(me.input.KEY.SPACE, "jump");
-		me.input.bindKey(me.input.KEY.A, "attack");
+		me.input.bindKey(me.input.KEY.RIGHT, "right");//moves player right
+		me.input.bindKey(me.input.KEY.LEFT, "left");//moves player left
+		me.input.bindKey(me.input.KEY.SPACE, "jump");//moves player jump
+		me.input.bindKey(me.input.KEY.A, "attack");//makes player attack
 
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();

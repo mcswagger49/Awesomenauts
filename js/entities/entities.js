@@ -64,11 +64,11 @@ game.PlayerEntity = me.Entity.extend({
 				this.renderable.setAnimationFrame();	
 			}
 		}
-	else if (this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")) {
-			if(!this.renderable.isCurrentAnimation("walk")){
+	else if (this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")) {//makes player attack
+			if(!this.renderable.isCurrentAnimation("walk")){//causes the player walk
 				this.renderable.setCurrentAnimation("walk");		
 		}
-	}else if(!this.renderable.isCurrentAnimation("attack")) {
+	}else if(!this.renderable.isCurrentAnimation("attack")) {//helps show player attack
 		this.renderable.setCurrentAnimation("idle");//makes the character stay still 
 		}
 
@@ -79,7 +79,7 @@ game.PlayerEntity = me.Entity.extend({
 		return true;
 	},
 
-	collideHandler: function(response) {
+	collideHandler: function(response) {//all the 
 		if(response.b.type==='EnemyBaseEntity'){
 			var ydif = this.pos.y - response.b.pos.y;
 			var xdif = this.pos.x - response.b.pos.x;
@@ -88,15 +88,15 @@ game.PlayerEntity = me.Entity.extend({
 				this.body.falling = false;
 				this.body.vel.y = -1;
 			}
-			else if(xdif>-35 && this.facing==='right' && xdif<0){
+			else if(xdif>-35 && this.facing==='right' && xdif<0){//
 				this.body.vel.x = 0;
 				this.pos.x = this.pos.x -1;
-			}else if(xdif<70 && this.facing==='left' && xdif>0){
+			}else if(xdif<70 && this.facing==='left' && xdif>0){//
 				this.body.vel.x = 0;
 				this.pos.x = this.pos.x +1;
 			}
 
-			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 1000) {
+			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 1000) {//makes the enemy tower destroyed with health 
 				console.log("tower Hit");
 				this.lastHit = this.now;
 				response.b.loseHealth();
@@ -105,7 +105,7 @@ game.PlayerEntity = me.Entity.extend({
 	}
 });
 
-game.PlayerBaseEntity = me.Entity.extend({
+game.PlayerBaseEntity = me.Entity.extend({//launchs the playersbase to show
 	init: function(x, y, settings) {
 		this._super(me.Entity, 'init', [x, y, {
 			image: "tower",
@@ -146,7 +146,7 @@ onCollision: function(){
 
 });
 
-game.EnemyBaseEntity = me.Entity.extend({
+game.EnemyBaseEntity = me.Entity.extend({//launches and shows the enemybase on the website
 	init: function(x, y, settings) {
 		this._super(me.Entity, 'init', [x, y, {
 			image: "tower",
@@ -189,7 +189,7 @@ loseHealth: function(){
 }
 });
 
-game.EnemyCreep = me.Entity.extend({
+game.EnemyCreep = me.Entity.extend({//code for the enemycreep to be on webstie
 	init: function(x, y, settings) {
 		this._super(me.Entity, 'init', [x, y, {
 			image: "creep1",
