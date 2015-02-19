@@ -11,14 +11,14 @@ var game = {
 		enemyCreepHealth: 10,
 		playerHealth: 10,
 		enemyCreepAttack: 1,
-		playerAttack: 1,
+		playerAttack: 2,
 		orcBaseDamage: 10,
 		orcBaseHealth: 100,
 		orcBaseSpeed: 3,
 		orcBaseDefense: 0,
 		playerAttackTimer: 1000,
 		enemyCreepAttackTimer: 1000,
-		playerMoveSpeed: 5,
+		playerMoveSpeed: 5.5,
 		creepMoveSpeed: 5,
 		gameManager: "",
 		player: "",
@@ -59,6 +59,7 @@ var game = {
 		me.pool.register("PlayerBase", game.PlayerBaseEntity);
 		me.pool.register("EnemyBase", game.EnemyBaseEntity);
 		me.pool.register("EnemyCreep", game.EnemyCreep, true);
+		me.pool.register("Gloop", game.Gloop, true);
 		me.pool.register("GameManager", game.GameManager);
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
