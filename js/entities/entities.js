@@ -1,4 +1,17 @@
 game.PlayerEntity = me.Entity.extend({
+init: function(x, y, settings) {
+		this.setSuper();
+		this.setPlayerTimers();
+		this.type = "PlayerEntity";//the type of player 
+		this.setFlags();
+
+		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
+
+		this.addAnimation();
+
+		this.renderable.setCurrentAnimation("idle");//helps cause the player to face the screen
+},
+setSuper: function(){
 	init: function(x, y, settings) {
 		this._super(me.Entity, 'init', [x, y, {
 			image: "player",//the img of thev player
@@ -10,25 +23,27 @@ game.PlayerEntity = me.Entity.extend({
 				return(new me.Rect(0, 0, 64, 64)).toPolygon();
 			}
 		}]);
-		this.type = "PlayerEntity";//the type of player 
-		this.health = game.data.playerHealth;//how much health the player has 
-		this.body.setVelocity(game.data.playerMoveSpeed, 20);//changed to make player walk on solid floor
-		//Keeps track of which direction your chacrter is going 
-		this.facing = "right";
-		this.now = new Date().getTime();
-		this.lastHit = this.now;
-		this.dead = false;
-		this.attack = game.data.playerAttack;
-		this.lastAttack = new Date().getTime();
-		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
-
-		this.renderable.addAnimation("idle", [78]);//makes the player orc to face the screen 
-		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
-		this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
-
-		this.renderable.setCurrentAnimation("idle");//helps cause the player to face the screen
 },
-
+setPlayerTimers: function(){
+	this.now = new Date().getTime();
+		this.lastHit = this.now;
+		this.lastAttack = new Date().getTime();
+},
+setAttributes: function(){
+	this.health = game.data.playerHealth;//how much health the player has 
+	this.attack = game.data.playerAttack;
+	this.body.setVelocity(game.data.playerMoveSpeed, 20);//changed to make player walk on solid floor
+},
+setFlags: function(){
+	//Keeps track of which direction your chacrter is going 
+	this.facing = "right";
+	this.dead = false;
+},
+addAnimation: function(){
+	this.renderable.addAnimation("idle", [78]);//makes the player orc to face the screen 
+	this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
+	this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
+},
 	update: function(delta) {
 		this.now = new Date().getTime();
 
