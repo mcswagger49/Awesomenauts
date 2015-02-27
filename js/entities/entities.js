@@ -1,7 +1,8 @@
 game.PlayerEntity = me.Entity.extend({
 init: function(x, y, settings) {
-		this.setSuper();
+		this.setSuper(x, y);
 		this.setPlayerTimers();
+		this.setAttributes();
 		this.type = "PlayerEntity";//the type of player 
 		this.setFlags();
 
@@ -11,8 +12,7 @@ init: function(x, y, settings) {
 
 		this.renderable.setCurrentAnimation("idle");//helps cause the player to face the screen
 },
-setSuper: function(){
-	init: function(x, y, settings) {
+setSuper: function(x, y){
 		this._super(me.Entity, 'init', [x, y, {
 			image: "player",//the img of thev player
 			width: 64,//how wide the plyaer is 
@@ -47,7 +47,7 @@ addAnimation: function(){
 },
 update: function(delta) {
 		this.now = new Date().getTime();
-		this.dead = checkIfDead();
+		this.dead = this.checkIfDead();
 		this.checkKeyPressesAndMove();
 		this.setAnimation();
 		me.collision.check(this, true, this.collideHandler.bind(this), true);
@@ -74,8 +74,7 @@ checkKeyPressesAndMove: function(){
 				this.jump();
 			}
 			this.attacking = me.input.isKeyPressed("attack");
-		}
-},
+		},
 moveRight: function(){
   		//set the position of my x by adding the velocity defined above in
  		//setVelocity() and multiplying it by me.timer.tick.
@@ -91,6 +90,10 @@ moveLeft: function(){
 		this.facing = "left";
 		this.body.vel.x -= this.body.accel.x * me.timer.tick;	
 		this.flipX(false); 
+},
+jump: function(){
+	this.body.jumping = true;
+	this.body.vel.y -= this.body.accel.y * me.timer.tick;
 },
 setAnimation: function(){
 	if (this.attacking) {//the key the attack
@@ -117,9 +120,9 @@ setAnimation: function(){
 		this.health = this.health - damage;//add the player taking damage
 		console.log("Player Health: " + this.health);//make health show up in the console
 },
-jump: function(){
-	this.body.jumping = true;
-	this.body.vel.y -= this.body.accel.y * me.timer.tick;
+loseHealth: function(damage){
+	//causes players to lose
+	this.health = this.health - damage;
 },
 collideHandler: function(response) {//all the 
 		if(response.b.type==='EnemyBaseEntity'){
@@ -158,7 +161,7 @@ collideWithEnemyCreep: function(response){
 
 	if(this.checkAttack(xdif, ydif)){
 	   this.hitCreep(response);
-};
+	};
 },
 stopMovement: function(xdif){
 		 if(xdif>0){
@@ -183,8 +186,7 @@ checkAttack: function(xdif, ydif){
 			return true;
 		}
 		return false;
-	}
-
+	},
 hitCreep: function(response){
 		if(response.b.health <= game.data.playerAttack){
 				//adds one gold for & creep kill
@@ -192,74 +194,5 @@ hitCreep: function(response){
 				console.log("Current gold: " + game.data.gold);
 			}
 			response.b.loseHealth(game.data.playerAttack);
-},
-});
-update:function(delta) {
-	if(this.health<=0) {
-		this.broken = true;
-		this.renderable.setCurrentAnimation("broken");
-	}
-	this.body.update(delta);
-
-	this._super(me.Entity, "update", [delta]);
-	return true;
-},
-loseHealth: function(damage){
-	this.health = this.health - damage;
-},
-onCollision: function(){
-},
-});
-update:function(delta) {
-	if(this.health<=0) {
-		this.broken = true;
-		this.renderable.setCurrentAnimation("broken");
-	}
-	this.body.update(delta);
-
-	this._super(me.Entity, "update", [delta]);
-	return true;
-},
-onCollision: function(){	
-},
-loseHealth: function(damage){
-	this.health -= damage;
-},
-})
-collideHandler: function(response){//checking for collisions
-		if(response.b.type==='EnemyBaseEntity') {
-			this.attacking=true;
-			//this.lastAttacking=this.now;
-			this.body.vel.x = 0;
-			//keeps moving the creep to the right to main tain its position
-			this.pos.x = this.pos.x + 1;
-			//checks that it has been at least 1 second since this creep hit a base
-			if((this.now-this.lastHit >= 1000)) {
-				//updates the lastHit timer
-				this.lastHit = this.now;
-				//makes the player base call its loseHealth function
-				//damage of 1
-				response.b.loseHealth(game.data.playerAttack);
-			}
-		}else if (response.b.type==='EnemyCreep'){
-			var xdif = this.pos.x - response.b.pos.x;
-
-			this.attacking=true;
-			//this.lastAttacking=this.now;
-			this.body.vel.x = 0;
-			//keeps moving the creep to the right to main tain its position
-			if (xdif>0){
-				this.pos.x = this.pos.x + 1;
-				this.body.vel.x = 0;
-			}
-			//checks that it has been at least 1 second since this creep hit a base
-			if((this.now-this.lastHit >= 1000) && xdif>0) {
-			//updates the lastHit timer
-			this.lastHit = this.now;
-			//makes the player call its loseHealth function
-			//damage of 1
-			response.b.loseHealth(game.data.playerAttack);
-			}
-		}
-},
+		},
 });

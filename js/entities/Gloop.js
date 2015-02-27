@@ -37,17 +37,11 @@ game.Gloop = me.Entity.extend({//code for the enemycreep to be on webstie
 		if (this.health <= 0) {
 			me.game.world.removeChild(this);
 		}
-
-
 		this.now = new Date().getTime();
-
 		this.body.vel.x += this.body.accel.x * me.timer.tick;//makes creep spawn and move
 		this.flipX(true);
-
 		me.collision.check(this, true, this.collideHandler.bind(this), true);//checking for collisions
-
 		this.body.update(delta);//updates constantly
-
 		this._super(me.Entity, "update", [delta]);//updates movement
 		return true;
 	},

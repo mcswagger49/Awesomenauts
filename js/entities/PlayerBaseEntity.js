@@ -27,7 +27,6 @@ update:function(delta) {
 		this.renderable.setCurrentAnimation("broken");
 	}
 	this.body.update(delta);
-
 	this._super(me.Entity, "update", [delta]);
 	return true;
 },
