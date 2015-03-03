@@ -21,6 +21,7 @@ var game = {
 		playerMoveSpeed: 5.5,
 		creepMoveSpeed: 5,
 		gameManager: "",
+		heroDeathManager: "",
 		player: "",
 		exp: 0,
 		gold: 0,
@@ -66,7 +67,8 @@ var game = {
 		me.pool.register("EnemyBase", game.EnemyBaseEntity);
 		me.pool.register("EnemyCreep", game.EnemyCreep, true);
 		me.pool.register("Gloop", game.Gloop, true);
-		me.pool.register("GameManager", game.GameManager);
+		me.pool.register("GameTimerManager", game.GameManager);
+		me.pool.register("HeroDeathManager", game.HeroDeathManager);
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
