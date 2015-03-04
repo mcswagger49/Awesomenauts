@@ -23,6 +23,7 @@ game.EnemyBaseEntity = me.Entity.extend({//launches and shows the enemybase on t
 update:function(delta) {
 	if(this.health<=0) {
 		this.broken = true;
+		game.data.win = true;
 		this.renderable.setCurrentAnimation("broken");
 	}
 	this.body.update(delta);

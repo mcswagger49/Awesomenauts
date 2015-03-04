@@ -69,6 +69,8 @@ var game = {
 		me.pool.register("Gloop", game.Gloop, true);
 		me.pool.register("GameTimerManager", game.GameManager);
 		me.pool.register("HeroDeathManager", game.HeroDeathManager);
+		me.pool.register("ExperienceManager", game.ExperienceManager);
+
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
