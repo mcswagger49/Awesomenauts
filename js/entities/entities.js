@@ -195,4 +195,4 @@ hitCreep: function(response){
 			}
 			response.b.loseHealth(game.data.playerAttack);
 		},
-});
+});		
