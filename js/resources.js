@@ -12,6 +12,7 @@ game.resources = [
 	{name: "gloop", type: "image", src:"data/img/gloop.png"},
 	{name: "title-screen", type: "image", src:"data/img/space_wallpaper.png"},
 	{name: "exp-screen", type: "image", src:"data/img/loadpic.png"},
+	{name: "gold-screen", type: "image", src:"data/img/spend.png"},
 
 	/* Atlases 
 	 * @example
