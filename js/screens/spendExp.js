@@ -38,7 +38,7 @@ game.SpendExp = me.ScreenObject.extend({
 							console.log("not enough experience");
 					}
 				}else if(action === "F2"){
-				}
+			
 				}else if(action === "F3"){
 
 				}else if(action === "F4"){
