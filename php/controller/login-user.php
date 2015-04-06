@@ -27,9 +27,9 @@
 			$_SESSION["name"] = $username; 
 	  	  	echo json_encode($array);//Logged in correctly
 	  	  } else {
-	  	  	echo "<p>Invalid username and password</p>";//tells the user whats wrong but not actually teling them ;D
+	  	  	echo "Invalid username and password";//tells the user whats wrong but not actually teling them ;D
 		 }
 	} else {
-	 		echo "<p>Invalid username and password</p>";
+	 		echo "Invalid username and password";
 	 	 }
  
