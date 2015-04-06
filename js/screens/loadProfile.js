@@ -5,6 +5,9 @@ game.LoadProfile = me.ScreenObject.extend({
 	onResetEvent: function() {	
 			me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('exp-screen')), -10); // TODO
 
+			document.getElementById("input").style.visibility = "visible";
+			document.getElementById("load").style.visibility = "visible";
+
 			me.input.unbindKey(me.input.KEY.B);
 			me.input.unbindKey(me.input.KEY.Q);
 			me.input.unbindKey(me.input.KEY.E);
@@ -27,5 +30,7 @@ game.LoadProfile = me.ScreenObject.extend({
 	 *  action to perform when leaving this screen (state change)
 	 */
 		onDestroyEvent: function() {
+			document.getElementById("input").style.visibility = "visible";
+			document.getElementById("load").style.visibility = "visible";
 		}
 });
