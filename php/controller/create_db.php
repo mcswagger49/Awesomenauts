@@ -13,14 +13,4 @@
 			   .  "exp3 int(4),"
 			   .  "exp4 int(4),"
 			   .  "PRIMARY KEY (id))");//sets the primary key w/ id
-
-		if ($query) {
-
-			echo "<p>Successfully created table: users</p>";//shows that the tables of users was made.
-		}
-
-		else {
-
-			echo "<p>" . $_SESSION["connection"]->error . "</p>";//gives the error if it did not work properly
-		}
 ?>
