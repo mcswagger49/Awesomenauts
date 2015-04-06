@@ -1,0 +1,7 @@
+.readmore-js-toggle, .readmore-js-section {
+  width: 100%;
+  height: 20%;
+}
+.readmore-js-section {
+  overflow: hidden;
+}

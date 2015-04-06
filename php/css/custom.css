@@ -1,0 +1,104 @@
+@import url(http://fonts.googleapis.com/css?family=Chango);
+
+body{
+ font-family: 'Ubuntu Condensed', sans-serif;
+ position: relative;
+ background-size: 1366px 1060px;
+ background-repeat:auto;
+ padding:0;
+ margin:0;
+ background-image:url(http://www.mrwallpaper.com/wallpapers/space-cosmic-nebulae-stars-1920x1080.jpg);
+   /* make our image 100% width */
+ background-size:cover;
+}
+div{
+  position: relative;
+  margin: 5px;
+  padding: 5px;
+  color: #F75814;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  text-align: left;
+}
+li{
+  position: fixed;
+  border:2px double; 
+  color: #F75814;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  text-align: left;
+  background-image:url(http://en.spaceengine.org/_ph/3/82685745.jpg);
+
+  /* set the background gradient */
+  background:url(http://scotch.io/wp-content/uploads/2014/11/galaxies.jpg);
+  background-size:cover;
+
+  /* set the animation */
+  -webkit-animation:moving 20s ease infinite;
+}
+h1 {
+ text-align: center;
+ font-family: 'Ubuntu Condensed', sans-serif;
+ border:5px double blue; 
+ padding:10px;
+ color: blue;
+ background-image:url(http://en.spaceengine.org/_ph/3/82685745.jpg);
+
+  /* set the background gradient */
+  background:url(http://scotch.io/wp-content/uploads/2014/11/galaxies.jpg);
+  background-size:cover;
+
+  /* set the animation */
+  -webkit-animation:moving 20s ease infinite;
+}
+/* create the animation */
+ @-webkit-keyframes moving {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 500px;
+  }
+}​
+}
+.embed{
+  position: fixed;
+}
+@media(max-width: 1580px) {
+  html {
+    font-size: 18px;
+  }
+  .unbehaved-element {
+    font-size: 1.9em; /* Fine tune unbehaved elements */
+  }
+}
+@media(max-width: 980px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width:959px) {
+  #container{
+    width: 100%
+  }
+  #left-column{
+    width: 70%;
+  }
+  #right-column{
+    width: 30%;
+  }
+  img{
+    width: 100%;
+  }
+}
+@media screen and (max-width:640px) {
+  #left-column{
+    width: 100%;
+  }
+  #right-column{
+    width: 100%;
+  }
+}
+@media screen and (max-width:320px) {
+  #container{
+    width: 320px;
+  }
+}
