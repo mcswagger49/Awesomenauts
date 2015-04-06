@@ -17,7 +17,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
-
 	</head>
 	<body>
 		<!-- Canvas placeholder -->
@@ -104,6 +103,7 @@
 				}
 			});
 		</script>
+
 		<script>
 		$("#mainmenu").bind("click", function(){
 			me.state.change(me.state.MENU);
@@ -111,15 +111,15 @@
 		$("#register").bind("click", function(){
 			$.ajax({
 				type: "POST",
-				url:"php/controller/create_user.php",
+				url: "php/controller/create-user.php",
 				data: {
 					username: $('#username').val(),
-					password: $('password').val(),
+					password: $('#password').val()
 				},
 				dataType: "text"
 			})
 				.success(function(response){
-					if (response==="true") {
+					if(response==="true"){
 						me.state.change(me.state.PLAY);
 					}else{
 						alert(response);
@@ -127,8 +127,8 @@
 				})
 				.fail(function(response){
 						alert("Fail");
-				})
-		});
+				});
+			});
 		</script>
 	</body>
 </html>

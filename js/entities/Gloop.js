@@ -45,6 +45,9 @@ game.Gloop = me.Entity.extend({//code for the enemycreep to be on webstie
 		return true;
 	},
 	collideHandler: function(response){//checking for collisions
+	    var ydif = this.pos.y - response.b.pos.y;
+		var xdif = this.pos.x - response.b.pos.x;
+
 		if(response.b.type==='EnemyBase') {
 			this.attacking=true;
 			//this.lastAttacking=this.now;
@@ -60,7 +63,8 @@ game.Gloop = me.Entity.extend({//code for the enemycreep to be on webstie
 				response.b.loseHealth(game.data.enemyCreepAttack);
 			}
 		}else if (response.b.type==='EnemyCreep'){
-			var xdif = this.pos.x - response.b.pos.x;
+		 var xdif = this.pos.x - response.b.pos.x;
+		 var ydif = this.pos.y - response.b.pos.y;
 
 			this.attacking=true;
 			//this.lastAttacking=this.now;
@@ -80,4 +84,6 @@ game.Gloop = me.Entity.extend({//code for the enemycreep to be on webstie
 			}
 		}
 	}
+
+
 });
