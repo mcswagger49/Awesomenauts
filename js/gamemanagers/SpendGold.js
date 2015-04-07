@@ -115,11 +115,11 @@ checkCost: function(skill){
 		return true;
 	}else if (skill===3 && (game.data.gold >= ((game.data.skill3+1)*10))) {
 		return true;
-    }else if (skill===4 && (game.data.gold >= ((game.data.skill4+1)*10))) {
+    }else if (skill===4 && (game.data.gold >= ((game.data.ability1+1)*10))) {
 		return true;
-	}else if (skill===5 && (game.data.gold >= ((game.data.skill5+1)*10))) {
+	}else if (skill===5 && (game.data.gold >= ((game.data.ability2+1)*10))) {
 		return true;
-	}else if (skill===6 && (game.data.gold >= ((game.data.skill6+1)*10))) {
+	}else if (skill===6 && (game.data.gold >= ((game.data.ability3+1)*10))) {
 		return true;
 	}else{
 		return false;
@@ -131,21 +131,26 @@ makePurchase: function(skill){
 		game.data.gold -= ((game.data.skill1+1)*10);
 		game.data.skill1 += 1;
 		game.data.playerAttack += 1; 
-	}else if(skill ===2){
+	}else if(skill === 2){
 		game.data.gold -= ((game.data.skill2+1)*10);
 		game.data.skill2 += 1;
-	}else if(skill ===3){
+		game.data.playerAttack += 1; 
+	}else if(skill === 3){
 		game.data.gold -= ((game.data.skill3+1)*10);
 		game.data.skill3 += 1;
-	}else if(skill ===4){
+		game.data.playerAttack += 1; 
+	}else if(skill === 4){
 		game.data.gold -= ((game.data.ability1+1)*10);
 		game.data.ability1 += 1;
-	}else if(skill ===5){
+		game.data.playerAttack += 1; 
+	}else if(skill === 5){
 		game.data.gold -= ((game.data.ability2+1)*10);
 		game.data.ability2 += 1;
-	}else if(skill ===6){
+		game.data.playerAttack += 1; 
+	}else if(skill === 6){
 		game.data.gold -= ((game.data.ability3+1)*10);
 		game.data.ability3 += 1;
+		game.data.playerAttack += 1; 
 	}
 },
 

@@ -26,8 +26,9 @@ setSuper: function(x, y){
 },
 setPlayerTimers: function(){
 	this.now = new Date().getTime();
-		this.lastHit = this.now;
-		this.lastAttack = new Date().getTime();
+	this.lastHit = this.now;
+	this.lastAttack = new Date().getTime();
+	this.lastSpear = this.now;
 },
 setAttributes: function(){
 	this.health = game.data.playerHealth;//how much health the player has 
@@ -82,9 +83,6 @@ moveRight: function(){
  		//me.timer.tick makes the movement look smooth
 		this.body.vel.x += this.body.accel.x * me.timer.tick;
 		this.facing = "right";
-		this.now = new Date() .getTime();
-		this.lastHit = this.now;
-		this.lastAttack = new Date() .getTime();
 		this.flipX(true); 
 },
 moveLeft: function(){
@@ -101,16 +99,16 @@ checkAbilityKeys: function(){
 		//this.speedBurst();
 	}else if (me.input.isKeyPressed("skill2")){
 		//this.eatCreep();
-	}
-	else if (me.input.isKeyPressed("skill3")){
+	}else if (me.input.isKeyPressed("skill3")){
+		console.log("skill3");
 		this.throwSpear();
 	}
 },
 throwSpear: function(){
-	if(this.lastSpear >= game.data.spearTimer && game.data.ability3 >= 0){
-	this.lastSpear = this.now;
-	var spear = me.pool.pull("spear", this.pos.x, this.pos.y, {});
-	me.game.world.addChild(spear, 10);
+	if((this.now-this.lastSpear) >= game.data.spearTimer*1000 && game.data.ability3 > 0){
+		this.lastSpear = this.now;
+		var spear = me.pool.pull("spear", this.pos.x, this.pos.y, {}, this.facing);
+		me.game.world.addChild(spear, 10);
 	}
 },
 setAnimation: function(){
