@@ -43,7 +43,7 @@ var game = {
 		buyscreen: "",
 		buytext: "",
 		minimap: "",
-		miniplayer: "",
+		miniPlayer: "",
 	},
 	
 	
