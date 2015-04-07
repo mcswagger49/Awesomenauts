@@ -95,7 +95,7 @@ var game = {
 		me.pool.register("ExperienceManager", game.ExperienceManager);
 		me.pool.register("SpendGold", game.SpendGold);
 		me.pool.register("spear", game.SpearThrow, true);
-		me.register("minimap", game.MiniMap, true);
+		me.pool.register("minimap", game.MiniMap, true);
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());

@@ -27,7 +27,6 @@ game.PlayScreen = me.ScreenObject.extend({
 		game.data.minimap = me.pool.pull("minimap", 10, 10, {});
 		me.game.world.addChild(game.data.minimap, 30);
 
-		this.resetPlayer(10, 0);
 		
 		me.input.bindKey(me.input.KEY.B, "buy");
 		me.input.bindKey(me.input.KEY.Q, "skill1");
