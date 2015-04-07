@@ -49,6 +49,7 @@ update: function(delta) {
 		this.now = new Date().getTime();
 		this.dead = this.checkIfDead();
 		this.checkKeyPressesAndMove();
+		this.checkAbilityKeys();
 		this.setAnimation();
 		me.collision.check(this, true, this.collideHandler.bind(this), true);
 		this.body.update(delta);
@@ -95,6 +96,23 @@ jump: function(){
 	this.body.jumping = true;
 	this.body.vel.y -= this.body.accel.y * me.timer.tick;
 },
+checkAbilityKeys: function(){
+	if(me.input.isKeyPressed("skill1")){
+		//this.speedBurst();
+	}else if (me.input.isKeyPressed("skill2")){
+		//this.eatCreep();
+	}
+	else if (me.input.isKeyPressed("skill3")){
+		this.throwSpear();
+	}
+},
+throwSpear: function(){
+	if(this.lastSpear >= game.data.spearTimer && game.data.ability3 >= 0){
+	this.lastSpear = this.now;
+	var spear = me.pool.pull("spear", this.pos.x, this.pos.y, {});
+	me.game.world.addChild(spear, 10);
+	}
+},
 setAnimation: function(){
 	if (this.attacking) {//the key the attack
 			if (!this.renderable.isCurrentAnimation("attack")) {
@@ -115,8 +133,7 @@ setAnimation: function(){
 		this.renderable.setCurrentAnimation("idle");//makes the character stay still 
 		}
 	},
-
-	loseHealth: function(damage){
+loseHealth: function(damage){
 		this.health = this.health - damage;//add the player taking damage
 		console.log("Player Health: " + this.health);//make health show up in the console
 },

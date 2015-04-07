@@ -39,6 +39,9 @@ game.resources = [
 	 * @example
 	 * {name: "example_bgm", type: "audio", src: "data/bgm/"},
 	 */	
+ 	 {name: "Savant-Splinter", type: "audio", src: "music/"},//allows the level to play music 
+
+
 
 	/* Sound effects. 
 	 * @example
